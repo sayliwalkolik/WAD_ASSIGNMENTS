@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="registration.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="styler.css">
+  <script>
+    $(document).ready(function(){
+      $("button").click(function(){
+        // Get form data
+        var userId = $("#userId").val();
+        var username = $("#username").val();
+        var email = $("#email").val();
+        var password = $("#password").val();
+        var dob = $("#dob").val();
+        var gender = $("input[name='gender']:checked").val();
+        var address = $("#address").val();
+        var city = $("#city").val();
+        var pincode = $("#pincode").val();
+        var state = $("#state").val();
+        var hobbies = $("input[name='hobbies']:checked").map(function(){ return this.value; }).get().join(", ");
+
+        // Validate required fields
+        if (!userId || !username || !email || !password || !dob || !gender || !address || !city || !pincode || !state) {
+          alert("Please fill in all required fields.");
+          return;
+        }
+
+        // Validate email format
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          alert("Invalid email format. Please enter a valid email address.");
+          return;
+        }
+
+        // Validate pincode format
+        var pincodeRegex = /^\d{6}$/;
+        if (!pincodeRegex.test(pincode)) {
+          alert("Invalid pincode format. Please enter a 6-digit pincode.");
+          return;
+        }
+
+        // Display data
+        var displayText = "User ID: " + userId + "<br>Username: " + username + "<br>Email: " + email +
+                          "<br>Password: " + password + "<br>Date of Birth: " + dob + "<br>Gender: " + gender +
+                          "<br>Address: " + address + "<br>City: " + city + "<br>Pincode: " + pincode +
+                          "<br>State: " + state + "<br>Hobbies: " + hobbies;
+
+        $("#div1").html(displayText);
+      });
+    });
+  </script>
+</head>
+<body>
+
+    
+
+  
+
+  <form>
+    <label for="userId" class="required">User ID *:</label>
+    <input type="text" id="userId" name="userId" required><br>
+
+    <label for="username" class="required">Username *:</label>
+    <input type="text" id="username" name="username" required><br>
+
+    <label for="email" class="required">Email: *</label>
+    <input type="email" id="email" name="email" required><br>
+
+    <label for="password" class="required">Password: *</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <label for="dob" class="required">Date of Birth:</label>
+    <input type="date" id="dob" name="dob" required pattern="\d{4}-\d{2}-\d{2}" max="2004-01-01"><br>
+     
+    <label class="required">Gender:</label>
+    <input type="radio" id="male" name="gender" value="Male" required>
+    <label for="male">Male</label>
+    <input type="radio" id="female" name="gender" value="Female" required>
+    <label for="female">Female</label><br>
+
+    <label for="address" class="required">Address:</label>
+    <input type="text" id="address" name="address" required><br>
+
+    <label for="state" class="required">city:</label>
+    <select id="state" name="state" required>
+      <option value="">Select city</option>
+      <option value="pune">Maharashtra</option>
+      <option value="nagpur">Karnataka</option>
+      <option value="punji">Goa</option>
+      <option value="binar">Madhya Pradesh</option>
+      <option value="kolhapur">Uttar Pradesh</option>
+    </select><br>
+
+    <label for="pincode" class="required">Pincode:*</label>
+    <input type="text" id="pincode" name="pincode" required placeholder="Enter 6-digit pincode"><br>
+
+    <label for="state" class="required">State:</label>
+    <select id="state" name="state" required>
+      <option value="">Select State</option>
+      <option value="Maharashtra">Maharashtra</option>
+      <option value="Karnataka">Karnataka</option>
+      <option value="Goa">Goa</option>
+      <option value="MP">Madhya Pradesh</option>
+      <option value="UP">Uttar Pradesh</option>
+    </select><br>
+
+    <label class="required">Hobbies:</label>
+    <input type="checkbox" id="hobby1" name="hobbies" value="Reading">
+    <label for="hobby1">Reading</label>
+    <input type="checkbox" id="hobby2" name="hobbies" value="Gaming">
+    <label for="hobby2">Gaming</label>
+    <input type="checkbox" id="hobby3" name="hobbies" value="Traveling">
+    <label for="hobby3">Traveling</label><br>
+
+    <button type="button">Submit</button>
+    <button type="button">Cancel</button>
+  </form>
+
+  <div id="div1"></div>
+
+</body>
+</html>
